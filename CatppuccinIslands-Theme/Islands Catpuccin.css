@@ -1,0 +1,232 @@
+/**
+ * @name SimpleAndClean + Catppuccin Mocha Pink (v5 - Strict Islands)
+ * @description Only sidebar + main chat become islands. Nothing else.
+ */
+
+:root {
+    --border-radius: 26px;
+    --gap: 12px;
+    --panel: rgba(24, 24, 37, 0.82);
+    --panel-strong: rgba(30, 30, 46, 0.88);
+}
+
+/* ========== CATPPUCCIN MOCHA + PINK ========== */
+.dark, :root {
+    --surface-inset: 240 21% 7%;
+    --surface-base: 240 21% 9%;
+    --surface-l1: 240 21% 12%;
+    --surface-l1-hover: 237 16% 18%;
+    --surface-l2: 237 16% 20%;
+    --surface-l3: 234 13% 25%;
+    --surface-l4: 234 13% 25%;
+    --surface-l4-hover: 233 12% 30%;
+    --surface-invert: 226 64% 88%;
+
+    --background-color: 240 21% 12%;
+    --background: #1e1e2e;
+    --background-secondary: #181825;
+    --gradient-bg: #181825;
+
+    --overlay: hsl(240 23% 5% / 0.5);
+    --popover: #181825;
+    --important: #313244;
+    --important-hover: #45475a;
+
+    --fg-primary: 226 64% 88%;
+    --fg-secondary: 228 17% 68%;
+    --fg-tertiary: 230 13% 55%;
+    --fg-invert: 240 21% 9%;
+    --fg-danger: 343 81% 75%;
+    --fg-positive: 115 54% 76%;
+    --fg-link: 217 92% 76%;
+    --fg-link-hover: 217 92% 82%;
+
+    --border-l1: hsl(226 64% 88% / 0.07);
+    --border-l2: hsl(226 64% 88% / 0.11);
+    --border-l3: hsl(226 64% 88% / 0.15);
+    --ring: #f5c2e7;
+
+    --button-filled: #cdd6f4;
+    --button-filled-hover: #bac2de;
+    --button-filled-active: #a6adc8;
+    --button-ghost-hover: hsl(226 64% 88% / 0.07);
+    --button-ghost-active: hsl(226 64% 88% / 0.11);
+    --button-primary: #f5c2e7;
+    --button-primary-hover: #f2a6db;
+    --button-secondary: hsl(226 64% 88% / 0.08);
+    --button-secondary-hover: hsl(226 64% 88% / 0.13);
+    --button-secondary-selected: hsl(226 64% 88% / 0.18);
+    --button-text-hover: hsl(226 64% 88% / 0.07);
+    --button-outline-border: hsl(226 64% 88% / 0.1);
+
+    --card: #181825;
+    --card-hover: #1e1e2e;
+    --card-focus: #313244;
+    --card-border: hsl(226 64% 88% / 0.08);
+    --card-border-focus: hsl(316 72% 86% / 0.3);
+    --chip: #181825;
+
+    --input: #181825;
+    --input-hover: #1e1e2e;
+    --input-background: #181825;
+    --input-background-hover: #1e1e2e;
+    --input-border: hsl(226 64% 88% / 0.1);
+    --input-border-focus: #f5c2e7;
+    --input-glow: hsl(316 72% 86% / 0.15);
+    --input-button-background: #181825;
+    --input-button-background-hover: #313244;
+    --input-button-background-selected: #45475a;
+    --input-button-border: hsl(226 64% 88% / 0.08);
+    --input-button-border-hover: hsl(226 64% 88% / 0.14);
+
+    --primary: 316 72% 86%;
+    --secondary: 228 17% 68%;
+    --incognito-accent: 267 84% 81%;
+    --highlight: hsl(316 72% 86% / 0.16);
+
+    --muted: 234 13% 25%;
+    --muted-foreground: 228 17% 68%;
+    --accent: 234 13% 25%;
+    --accent-foreground: 226 64% 88%;
+    --destructive: 343 81% 75%;
+    --destructive-foreground: 240 21% 9%;
+    --card-foreground: 226 64% 88%;
+    --popover-foreground: 226 64% 88%;
+    --primary-foreground: 240 21% 9%;
+    --secondary-foreground: 226 64% 88%;
+
+    --sidebar-foreground: 226 64% 88%;
+    --sidebar-primary: 316 72% 86%;
+    --sidebar-primary-foreground: 240 21% 9%;
+    --sidebar-accent: 234 13% 25%;
+    --sidebar-accent-foreground: 226 64% 88%;
+
+    --link: #89b4fa;
+    --link-hover: #b4befe;
+}
+
+/* ========== CLEAN BACKGROUND (no wallpaper) ========== */
+html, body {
+    background: #11111b !important;
+}
+
+/* ========== ONLY TWO ISLANDS ========== */
+
+/* 1. Sidebar island */
+
+[class*="group peer md:block text-sidebar-foreground z-[40] print:hidden"]{
+    margin: var(--gap) !important;
+    margin-right: 6px !important;
+    background: var(--panel) !important;
+    border: 1px solid rgba(205, 214, 244, 0.08) !important;
+    border-radius: var(--border-radius) !important;
+    overflow: hidden !important;
+}
+
+[class*="flex flex-col mt-auto shrink-0 p-2 pt-1 gap-0"]{
+    margin: 0px !important;
+    margin-right: 40px !important;
+    background: var(--panel) !important;
+    border: 1px solid rgba(205, 214, 244, 0.08) !important;
+    border-radius: var(--border-radius) !important;
+    overflow: hidden !important;
+}
+
+.flex.min-h-0.flex-col.overflow-auto.grow.group-data-\[collapsible\=icon\]\:overflow-hidden.relative.overflow-y-auto.overflow-x-hidden.scrollbar-gutter-stable-single {
+    width: 210px !important;
+}
+.mx-2.border-t.transition-colors.duration-150.border-border-l1{
+    display: none !important;
+}
+style attribute{
+    --sidebar-width-icon: 3.8rem !important;
+}
+.absolute.inset-x-0.top-0.z-10.flex.h-16.items-center.justify-between.gap-2.px-3 {
+    background-image: none !important;
+    background: transparent !important;
+}
+
+/* Remove the bottom gradient in voice mode */
+.pointer-events-none.absolute.bottom-0.z-0.w-full.bg-gradient-to-t {
+    display: none !important;
+    background: none !important;
+    height: 0 !important;
+}
+
+/* Remove the h-14 backdrop bar */
+.absolute.bottom-0.h-14.w-full,
+.chat-input-backdrop {
+    display: none !important;
+    height: 0 !important;
+}
+
+/* Make the voice mode bar match normal chat bar colors */
+.\@container\/voice-bar {
+    background: #181825 !important;          /* same as normal input */
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(205, 214, 244, 0.1) !important;
+    border-radius: 26px !important;
+}
+
+/* Force 26px radius on all buttons inside voice mode */
+.\@container\/voice-bar button,
+.\@container\/voice-bar [role="button"] {
+    border-radius: 26px !important;
+}
+
+/* 2. Main chat island */
+main {
+    margin: var(--gap) !important;
+    margin-left: 6px !important;
+    background: var(--panel-strong) !important;
+    backdrop-filter: var(--blur) !important;
+    -webkit-backdrop-filter: var(--blur) !important;
+    border: 1px solid rgba(205, 214, 244, 0.08) !important;
+    border-radius: var(--border-radius) !important;
+    overflow: hidden !important;
+}
+
+element.style {
+    padding-bottom: 74px; !important
+}
+
+.absolute.bottom-0.h-14.w-full {
+    height: 0 !important;
+}
+
+/* ========== MINIMAL RADIUS (only real controls) ========== */
+button,
+[role="button"],
+textarea,
+input,
+[contenteditable="true"] {
+    border-radius: 12px !important;
+}
+
+/* ========== INPUT FOCUS ========== */
+textarea:focus,
+input:focus,
+[contenteditable="true"]:focus {
+    border-color: #f5c2e7 !important;
+    box-shadow: 0 0 0 2px rgba(245, 194, 231, 0.18) !important;
+}
+
+/* ========== SCROLLBARS ========== */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(205, 214, 244, 0.14);
+    border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(245, 194, 231, 0.32);
+}
+
+* {
+    box-shadow: none !important;
+}
