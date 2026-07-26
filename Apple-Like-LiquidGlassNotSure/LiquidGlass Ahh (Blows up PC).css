@@ -1,0 +1,384 @@
+/**
+ * @name LiquidGlass + Catppuccin
+ * @description Islands + liquid glass treatment on existing panels only.
+ */
+
+:root {
+    --border-radius: 26px;
+    --gap: 12px;
+    --panel: rgba(24, 24, 37, 0.72);
+    --panel-strong: rgba(30, 30, 46, 0.78);
+}
+
+/* ========== CATPPUCCIN MOCHA + PINK ========== */
+.dark, :root {
+    --surface-inset: 240 21% 7%;
+    --surface-base: 240 21% 9%;
+    --surface-l1: 240 21% 12%;
+    --surface-l1-hover: 237 16% 18%;
+    --surface-l2: 237 16% 20%;
+    --surface-l3: 234 13% 25%;
+    --surface-l4: 234 13% 25%;
+    --surface-l4-hover: 233 12% 30%;
+    --surface-invert: 226 64% 88%;
+
+    --background-color: 240 21% 12%;
+    --background: #1e1e2e;
+    --background-secondary: #181825;
+    --gradient-bg: #181825;
+
+    --overlay: hsl(240 23% 5% / 0.5);
+    --popover: #181825;
+    --important: #313244;
+    --important-hover: #45475a;
+
+    --fg-primary: 0 0% 100%;
+    --fg-secondary: 0 0% 80%;
+    --fg-tertiary: 0 0% 65%;
+    --fg-invert: 240 21% 9%;
+    --fg-danger: 343 81% 75%;
+    --fg-positive: 115 54% 76%;
+    --fg-link: 217 92% 76%;
+    --fg-link-hover: 217 92% 82%;
+
+    --border-l1: hsl(226 64% 88% / 0.07);
+    --border-l2: hsl(226 64% 88% / 0.11);
+    --border-l3: hsl(226 64% 88% / 0.15);
+    --ring: #f5c2e7;
+
+    --button-filled: #cdd6f4;
+    --button-filled-hover: #bac2de;
+    --button-filled-active: #a6adc8;
+    --button-ghost-hover: hsl(226 64% 88% / 0.07);
+    --button-ghost-active: hsl(226 64% 88% / 0.11);
+    --button-primary: #f5c2e7;
+    --button-primary-hover: #f2a6db;
+    --button-secondary: hsl(226 64% 88% / 0.08);
+    --button-secondary-hover: hsl(226 64% 88% / 0.13);
+    --button-secondary-selected: hsl(226 64% 88% / 0.18);
+    --button-text-hover: hsl(226 64% 88% / 0.07);
+    --button-outline-border: hsl(226 64% 88% / 0.1);
+
+    --card: #181825;
+    --card-hover: #1e1e2e;
+    --card-focus: #313244;
+    --card-border: hsl(226 64% 88% / 0.08);
+    --card-border-focus: hsl(316 72% 86% / 0.3);
+    --chip: #181825;
+
+    --input: #181825;
+    --input-hover: #1e1e2e;
+    --input-background: #181825;
+    --input-background-hover: #1e1e2e;
+    --input-border: hsl(226 64% 88% / 0.1);
+    --input-border-focus: #f5c2e7;
+    --input-glow: hsl(316 72% 86% / 0.15);
+    --input-button-background: #181825;
+    --input-button-background-hover: #313244;
+    --input-button-background-selected: #45475a;
+    --input-button-border: hsl(226 64% 88% / 0.08);
+    --input-button-border-hover: hsl(226 64% 88% / 0.14);
+
+    --primary: 0 0% 100%;
+    --secondary: 228 17% 68%;
+    --incognito-accent: 267 84% 81%;
+    --highlight: hsl(316 72% 86% / 0.16);
+
+    --muted: 234 13% 25%;
+    --muted-foreground: 228 17% 68%;
+    --accent: 234 13% 25%;
+    --accent-foreground: 226 64% 88%;
+    --destructive: 343 81% 75%;
+    --destructive-foreground: 240 21% 9%;
+    --card-foreground: 226 64% 88%;
+    --popover-foreground: 226 64% 88%;
+    --primary-foreground: 240 21% 9%;
+    --secondary-foreground: 226 64% 88%;
+
+    --sidebar-foreground: 226 64% 88%;
+    --sidebar-primary: 316 72% 86%;
+    --sidebar-primary-foreground: 240 21% 9%;
+    --sidebar-accent: 234 13% 25%;
+    --sidebar-accent-foreground: 226 64% 88%;
+
+    --link: #89b4fa;
+    --link-hover: #b4befe;
+}
+
+/* ========== CLEAN BACKGROUND ========== */
+html, body {
+    background: #11111b !important;
+}
+
+/* ========== LIQUID GLASS BASE (reused) ========== */
+.liquid-glass {
+    background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.16) 0%,
+                rgba(255, 255, 255, 0.07) 50%,
+                rgba(255, 255, 255, 0.0) 50.1%,
+                rgba(255, 255, 255, 0.03) 100%) !important;
+    backdrop-filter: blur(25px) saturate(200%) contrast(90%) !important;
+    -webkit-backdrop-filter: blur(25px) saturate(200%) contrast(90%) !important;
+    border: 1px solid rgba(102, 59, 122, 0.55) !important;
+    border-top-color: rgba(191, 151, 214, 0.65) !important;
+    border-left-color: rgba(255, 255, 255, 0.35) !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35),
+                inset 0 1px 1px rgba(255, 255, 255, 0.22) !important;
+    border-radius: var(--border-radius) !important;
+}
+
+/* ========== ONLY TWO ISLANDS ========== */
+
+/* 1. Sidebar island */
+[class*="group peer md:block text-sidebar-foreground z-[40] print:hidden"] {
+    margin: var(--gap) !important;
+    margin-right: 6px !important;
+    background: var(--panel) !important;
+    border-radius: var(--border-radius) !important;
+    overflow: hidden !important;
+
+    /* liquid glass */
+    background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.14) 0%,
+                rgba(255, 255, 255, 0.06) 50%,
+                rgba(255, 255, 255, 0.0) 50.1%,
+                rgba(255, 255, 255, 0.03) 100%),
+                var(--panel) !important;
+    backdrop-filter: blur(25px) saturate(200%) contrast(90%) !important;
+    -webkit-backdrop-filter: blur(25px) saturate(200%) contrast(90%) !important;
+    border: 1px solid rgba(102, 59, 122, 0.55) !important;
+    border-top-color: rgba(191, 151, 214, 0.65) !important;
+    border-left-color: rgba(255, 255, 255, 0.32) !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35),
+                inset 0 1px 1px rgba(255, 255, 255, 0.22) !important;
+}
+
+[class*="flex flex-col mt-auto shrink-0 p-2 pt-1 gap-0"] {
+    margin: 0px !important;
+    margin-right: 40px !important;
+    background: var(--panel) !important;
+    border-radius: var(--border-radius) !important;
+    overflow: hidden !important;
+
+    /* liquid glass */
+    background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.12) 0%,
+                rgba(255, 255, 255, 0.05) 50%,
+                rgba(255, 255, 255, 0.0) 50.1%,
+                rgba(255, 255, 255, 0.02) 100%),
+                var(--panel) !important;
+    backdrop-filter: blur(22px) saturate(180%) !important;
+    border: 1px solid rgba(102, 59, 122, 0.45) !important;
+    border-top-color: rgba(191, 151, 214, 0.55) !important;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 1px rgba(255, 255, 255, 0.18) !important;
+}
+
+.flex.min-h-0.flex-col.overflow-auto.grow.group-data-\[collapsible\=icon\]\:overflow-hidden.relative.overflow-y-auto.overflow-x-hidden.scrollbar-gutter-stable-single {
+    width: 210px !important;
+}
+
+.mx-2.border-t.transition-colors.duration-150.border-border-l1 {
+    display: none !important;
+}
+
+style attribute {
+    --sidebar-width-icon: 3.8rem !important;
+}
+
+.absolute.inset-x-0.top-0.z-10.flex.h-16.items-center.justify-between.gap-2.px-3 {
+    background-image: none !important;
+    background: transparent !important;
+}
+
+/* 2. Main chat island */
+main {
+    margin: var(--gap) !important;
+    margin-left: 6px !important;
+    background: var(--panel-strong) !important;
+    border-radius: var(--border-radius) !important;
+    overflow: hidden !important;
+
+    /* liquid glass */
+    background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.13) 0%,
+                rgba(255, 255, 255, 0.05) 50%,
+                rgba(255, 255, 255, 0.0) 50.1%,
+                rgba(255, 255, 255, 0.025) 100%),
+                var(--panel-strong) !important;
+    backdrop-filter: blur(25px) saturate(200%) contrast(90%) !important;
+    -webkit-backdrop-filter: blur(25px) saturate(200%) contrast(90%) !important;
+    border: 1px solid rgba(102, 59, 122, 0.55) !important;
+    border-top-color: rgba(191, 151, 214, 0.65) !important;
+    border-left-color: rgba(255, 255, 255, 0.32) !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35),
+                inset 0 1px 1px rgba(255, 255, 255, 0.22) !important;
+}
+
+/* ========== VOICE MODE ========== */
+
+/* Remove the bottom gradient in voice mode */
+.pointer-events-none.absolute.bottom-0.z-0.w-full.bg-gradient-to-t {
+    display: none !important;
+    background: none !important;
+    height: 0 !important;
+}
+
+/* Remove the h-14 backdrop bar */
+.absolute.bottom-0.h-14.w-full,
+.chat-input-backdrop {
+    display: none !important;
+    height: 0 !important;
+}
+
+/* Voice mode bar – liquid glass */
+.\@container\/voice-bar {
+    background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.14) 0%,
+                rgba(255, 255, 255, 0.06) 50%,
+                rgba(255, 255, 255, 0.0) 50.1%,
+                rgba(255, 255, 255, 0.03) 100%),
+                #181825 !important;
+    backdrop-filter: blur(25px) saturate(200%) contrast(90%) !important;
+    -webkit-backdrop-filter: blur(25px) saturate(200%) contrast(90%) !important;
+    border: 1px solid rgba(102, 59, 122, 0.55) !important;
+    border-top-color: rgba(191, 151, 214, 0.65) !important;
+    border-left-color: rgba(255, 255, 255, 0.32) !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35),
+                inset 0 1px 1px rgba(255, 255, 255, 0.22) !important;
+    border-radius: 26px !important;
+}
+
+/* Force 26px radius on all buttons inside voice mode */
+.\@container\/voice-bar button,
+.\@container\/voice-bar [role="button"] {
+    border-radius: 26px !important;
+}
+
+/* ========== MINIMAL RADIUS (only real controls) ========== */
+button,
+[role="button"],
+textarea,
+input,
+[contenteditable="true"] {
+    border-radius: 14px !important;
+}
+
+/* ========== INPUT FOCUS ========== */
+textarea:focus,
+input:focus,
+[contenteditable="true"]:focus {
+    border-color: #f5c2e7 !important;
+    box-shadow: 0 0 0 2px rgba(245, 194, 231, 0.18) !important;
+}
+
+/* ========== SCROLLBARS (liquid style) ========== */
+::-webkit-scrollbar {
+    width: 8px !important;
+    height: 8px !important;
+}
+::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.22) !important;
+    border-radius: 10px !important;
+    border: 2px solid transparent !important;
+    background-clip: padding-box !important;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.35) !important;
+}
+
+* {
+    box-shadow: none !important;
+}
+
+/* Re-apply liquid glass shadows after the global reset */
+[class*="group peer md:block text-sidebar-foreground z-[40] print:hidden"],
+main,
+.\@container\/voice-bar {
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35),
+                inset 0 1px 1px rgba(255, 255, 255, 0.22) !important;
+}
+
+/* Normal query bar – same liquid glass as voice mode */
+.query-bar {
+    background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.14) 0%,
+                rgba(255, 255, 255, 0.06) 50%,
+                rgba(255, 255, 255, 0.0) 50.1%,
+                rgba(255, 255, 255, 0.03) 100%),
+                #181825 !important;
+    backdrop-filter: blur(25px) saturate(200%) contrast(90%) !important;
+    -webkit-backdrop-filter: blur(25px) saturate(200%) contrast(90%) !important;
+    border: 1px solid rgba(102, 59, 122, 0.55) !important;
+    border-top-color: rgba(191, 151, 214, 0.65) !important;
+    border-left-color: rgba(255, 255, 255, 0.32) !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35),
+                inset 0 1px 1px rgba(255, 255, 255, 0.22) !important;
+    border-radius: 26px !important;
+    ring: none !important;
+}
+
+/* Settings dialog – liquid glass island */
+[role="dialog"][data-analytics-name="settings"],
+[role="dialog"].fixed.left-\[50\%\].top-\[50\%\] {
+    background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.13) 0%,
+                rgba(255, 255, 255, 0.05) 50%,
+                rgba(255, 255, 255, 0.0) 50.1%,
+                rgba(255, 255, 255, 0.03) 100%),
+                rgba(30, 30, 46, 0.85) !important;
+    backdrop-filter: blur(25px) saturate(200%) contrast(90%) !important;
+    -webkit-backdrop-filter: blur(25px) saturate(200%) contrast(90%) !important;
+    border: 1px solid rgba(102, 59, 122, 0.55) !important;
+    border-top-color: rgba(191, 151, 214, 0.65) !important;
+    border-left-color: rgba(255, 255, 255, 0.32) !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4),
+                inset 0 1px 1px rgba(255, 255, 255, 0.22) !important;
+    border-radius: 26px !important;
+}
+
+/* Left nav inside settings */
+[role="dialog"] .flex.flex-col.w-\[200px\].shrink-0.p-2.border-r {
+    background: rgba(24, 24, 37, 0.5) !important;
+    border-right: 1px solid rgba(205, 214, 244, 0.08) !important;
+    border-radius: 20px 0 0 20px !important;
+}
+
+/* Dropdown menus & context menus – liquid glass */
+[role="menu"],
+[data-radix-menu-content],
+.group\/dropdown-content,
+[class*="bg-surface-elevated"][class*="rounded-2xl"] {
+    background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.14) 0%,
+                rgba(255, 255, 255, 0.06) 50%,
+                rgba(255, 255, 255, 0.0) 50.1%,
+                rgba(255, 255, 255, 0.03) 100%),
+                rgba(24, 24, 37, 0.85) !important;
+    backdrop-filter: blur(25px) saturate(200%) contrast(90%) !important;
+    -webkit-backdrop-filter: blur(25px) saturate(200%) contrast(90%) !important;
+    border: 1px solid rgba(102, 59, 122, 0.55) !important;
+    border-top-color: rgba(191, 151, 214, 0.65) !important;
+    border-left-color: rgba(255, 255, 255, 0.32) !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35),
+                inset 0 1px 1px rgba(255, 255, 255, 0.22) !important;
+    border-radius: 20px !important;
+}
+
+/* User message bubble – adapted glass style */
+[data-testid="user-message"].message-bubble {
+    border-radius: 26px 22px 22px 26px !important;
+    background: rgba(150, 24, 164, 0.30) !important;
+    background-blend-mode: plus-lighter !important;
+    box-shadow:
+        0 -0.5px 1px 0 rgba(255, 255, 255, 0.15) inset,
+        0 0.5px 1px 0 rgba(255, 255, 255, 0.3) inset,
+        0 1px 2px 0 rgba(255, 255, 255, 0.2) inset,
+        0 2px 12px 0 rgba(0, 0, 0, 0.2) !important;
+    backdrop-filter: blur(8px) brightness(115%) saturate(150%) sepia(20%) !important;
+    -webkit-backdrop-filter: blur(8px) brightness(115%) saturate(150%) sepia(20%) !important;
+    border: none !important;
+}
